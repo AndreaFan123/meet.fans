@@ -44,7 +44,7 @@ export function EventCard({
   return (
     <Card
       className={cn(
-        "overflow-hidden transition-all duration-300 h-full flex flex-col",
+        "overflow-hidden transition-all duration-300 h-full flex flex-col pt-0",
         featured ? "shadow-lg" : "hover:shadow-md",
         className
       )}

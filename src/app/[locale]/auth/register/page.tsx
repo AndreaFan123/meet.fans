@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   Card,
   CardContent,
@@ -14,31 +16,56 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  // FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Music } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+// import { Alert, AlertDescription } from "@/components/ui/alert";
 import { TopicSelection } from "@/components/auth/topic-selection";
+import { z } from "zod";
 import { Fade } from "@/components/ui/motion";
 
+const registerFormSchema = z.object({
+  username: z.string().min(2).max(50),
+  email: z.string().email(),
+  password: z.string().min(8).max(10),
+});
+
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState<"registration" | "topics">("registration");
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
+  // const [isLoading, setIsLoading] = useState(false);
+  const [step] = useState<"registration" | "topics">("registration");
+  const form = useForm<z.infer<typeof registerFormSchema>>({
+    resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
   });
   const t = useTranslations("registerPage");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  function onSubmit(values: z.infer<typeof registerFormSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
 
-    // Mock registration - in a real app, we'd call an API
-    setTimeout(() => {
-      setIsLoading(false);
-      setStep("topics");
-    }, 1500);
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   // Mock registration - in a real app, we'd call an API
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     setStep("topics");
+  //   }, 1500);
+  // };
 
   const handleTopicsComplete = (selectedTopics: string[]) => {
     // In a real app, we'd save the selected topics and redirect
@@ -47,7 +74,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen my-12 flex items-center justify-center p-4">
       <Fade duration={500}>
         {step === "registration" ? (
           <Card className="w-full max-w-md">
@@ -59,55 +86,54 @@ export default function RegisterPage() {
               <CardDescription>{t("description")}</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">{t("fullName")}</Label>
-                  <Input
-                    id="name"
-                    placeholder={t("fullName")}
-                    value={user.name}
-                    onChange={(e) => setUser({ ...user, name: e.target.value })}
-                    required
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-8"
+                >
+                  <FormField
+                    control={form.control}
+                    name="username"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Username</FormLabel>
+                        <FormControl>
+                          <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t("email")}</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="hello@example.com"
-                    value={user.email}
-                    onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
-                    }
-                    required
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">{t("password")}</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder={t("createPassword")}
-                    value={user.password}
-                    onChange={(e) =>
-                      setUser({ ...user, password: e.target.value })
-                    }
-                    required
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  <p className="text-sm text-muted-foreground">
-                    {t("passwordHint")}
-                  </p>
-                </div>
 
-                <Alert>
-                  <AlertDescription>{t("concent")}</AlertDescription>
-                </Alert>
-
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? t("creatingAccount") : t("createAccount")}
-                </Button>
-              </form>
+                  <Button type="submit">Submit</Button>
+                </form>
+              </Form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
               <div className="text-center text-sm text-muted-foreground">
