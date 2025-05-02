@@ -1,5 +1,8 @@
 import { drizzle } from "drizzle-orm/libsql";
+import { config } from "dotenv";
 import * as schema from "./schema/index";
+
+config({ path: ".env" });
 
 if (!process.env.TURSO_DATABASE_URL) {
   throw new Error("TURSO_DATABASE_URL is not defined");

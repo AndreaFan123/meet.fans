@@ -1,5 +1,7 @@
-// FIXME: Can't migrate, fix later
+import { config } from "dotenv";
 import type { Config } from "drizzle-kit";
+
+config({ path: ".env" });
 
 export default {
   schema: "./src/lib/db/schema/index.ts",
