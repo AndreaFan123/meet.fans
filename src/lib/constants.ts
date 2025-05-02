@@ -5,9 +5,9 @@ export const SITE_DESCRIPTION =
   "Connect with K-pop fans and join exciting meetups";
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Events", href: "/events" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "home", href: "/" },
+  { label: "events", href: "/events" },
+  { label: "pricing", href: "/pricing" },
 ];
 
 export const KPOP_GROUPS: KpopGroup[] = [

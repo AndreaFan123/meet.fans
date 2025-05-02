@@ -1,6 +1,6 @@
 export type UserRole = "user" | "admin";
 
-export type Locale = "zh_TW" | "en_US";
+export type Locale = "zh-TW" | "en-US";
 export interface User {
   id: string;
   name: string;

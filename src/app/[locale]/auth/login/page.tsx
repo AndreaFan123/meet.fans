@@ -31,8 +31,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Fade duration={500}>
-        <Card className="w-full max-w-md">
+      <Fade duration={500} className="w-full max-w-full sm:max-w-md">
+        <Card className="w-full">
           <CardHeader className="space-y-2 text-center">
             <div className="flex justify-center mb-2">
               <Music2 className="h-10 w-10 text-primary" />

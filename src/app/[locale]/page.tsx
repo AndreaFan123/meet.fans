@@ -6,23 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Fade } from "@/components/ui/motion";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <HeroSection />
-
       <Fade delay={100} duration={600}>
         <GroupShowcase />
       </Fade>
-
       <Fade delay={200} duration={600}>
         <FeaturedEvents />
       </Fade>
-
       <Fade delay={300} duration={600}>
         <Testimonials />
       </Fade>
-
       <Fade delay={400} duration={600}>
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
           <div className="bg-gradient-to-r from-primary/10 via-primary/20 to-primary/10 rounded-2xl p-8 sm:p-12">

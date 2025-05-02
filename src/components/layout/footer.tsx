@@ -1,8 +1,10 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SITE_NAME } from "@/lib/constants";
 import { Music2, Twitter, Instagram, Youtube } from "lucide-react";
 
 export function Footer() {
+  const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
   return (
@@ -16,10 +18,7 @@ export function Footer() {
                 {SITE_NAME}
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm">
-              Connect with K-pop fans around the world and join exciting
-              meetups.
-            </p>
+            <p className="text-muted-foreground text-sm">{t("description")}</p>
             <div className="flex space-x-4">
               <a
                 href="#"
@@ -46,14 +45,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-medium text-foreground mb-4">Navigation</h3>
+            <h3 className="font-medium text-foreground mb-4">
+              {t("navigation.navigation")}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Home
+                  {t("navigation.home")}
                 </Link>
               </li>
               <li>
@@ -61,7 +62,7 @@ export function Footer() {
                   href="/events"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Events
+                  {t("navigation.events")}
                 </Link>
               </li>
               <li>
@@ -69,51 +70,47 @@ export function Footer() {
                   href="/pricing"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Pricing
+                  {t("navigation.pricing")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-medium text-foreground mb-4">Account</h3>
+            <h3 className="font-medium text-foreground mb-4">
+              {t("account.account")}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/login"
+                  href="/auth/login"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Login
+                  {t("account.login")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/register"
+                  href="/auth/register"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Dashboard
+                  {t("account.register")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-medium text-foreground mb-4">Legal</h3>
+            <h3 className="font-medium text-foreground mb-4">
+              {t("legal.legal")}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/terms"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Terms of Service
+                  {t("legal.privacy_policy")}
                 </Link>
               </li>
               <li>
@@ -121,7 +118,7 @@ export function Footer() {
                   href="/privacy"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Privacy Policy
+                  {t("legal.terms_of_service")}
                 </Link>
               </li>
               <li>
@@ -129,7 +126,7 @@ export function Footer() {
                   href="/cookies"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  Cookie Policy
+                  {t("legal.cookie_policy")}
                 </Link>
               </li>
             </ul>
@@ -138,7 +135,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground text-center">
-            © {currentYear} {SITE_NAME}. All rights reserved.
+            © {currentYear} {SITE_NAME}. {t("all_rights_reserved")}
           </p>
         </div>
       </div>

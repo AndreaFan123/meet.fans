@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SITE_NAME, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,12 +11,12 @@ import { Music2, Menu, X } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("navbar");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Mock authentication status - replace with actual auth state
   const isAuthenticated = false;
 
   return (
@@ -40,25 +41,29 @@ export function Navbar() {
                   href={link.href}
                   className="text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 >
-                  {link.label}
+                  {t(link.label)}
                 </Link>
               ))}
             </div>
             <div className="ml-4 flex items-center">
-              <ThemeToggle />
+              <ThemeToggle
+                light={t("light")}
+                dark={t("dark")}
+                system={t("system")}
+              />
               {isAuthenticated ? (
                 <Link href="/dashboard">
                   <Button variant="ghost" className="ml-4">
-                    Dashboard
+                    {t("dashboard")}
                   </Button>
                 </Link>
               ) : (
                 <div className="flex space-x-2 ml-4">
-                  <Link href="/login">
-                    <Button variant="ghost">Login</Button>
+                  <Link href="/auth/login">
+                    <Button variant="ghost">{t("login")}</Button>
                   </Link>
-                  <Link href="/register">
-                    <Button>Register</Button>
+                  <Link href="/auth/register">
+                    <Button>{t("register")}</Button>
                   </Link>
                 </div>
               )}
@@ -67,7 +72,11 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <ThemeToggle />
+            <ThemeToggle
+              light={t("light")}
+              dark={t("dark")}
+              system={t("system")}
+            />
             <Button
               variant="ghost"
               size="icon"
@@ -94,7 +103,7 @@ export function Navbar() {
               className="text-muted-foreground hover:text-primary block px-3 py-2 text-base font-medium"
               onClick={() => setIsOpen(false)}
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
           {isAuthenticated ? (
@@ -103,23 +112,23 @@ export function Navbar() {
               className="block px-3 py-2 text-base font-medium"
               onClick={() => setIsOpen(false)}
             >
-              Dashboard
+              {t("dashboard")}
             </Link>
           ) : (
             <>
               <Link
-                href="/login"
+                href="/auth/login"
                 className="block px-3 py-2 text-base font-medium"
                 onClick={() => setIsOpen(false)}
               >
-                Login
+                {t("login")}
               </Link>
               <Link
-                href="/register"
+                href="/auth/register"
                 className="block px-3 py-2 text-base font-medium"
                 onClick={() => setIsOpen(false)}
               >
-                Register
+                {t("register")}
               </Link>
             </>
           )}

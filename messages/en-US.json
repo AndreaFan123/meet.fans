@@ -1,11 +1,49 @@
 {
-  "HomePage": {
-    "with": "Connect with",
+  "homePage": {
+    "connect_with": "Connect with",
     "k-pop": "K-pop",
     "fans": "fans",
     "join_meetups": "and join exciting meetups",
     "description": "Discover events hosted by passionate fans, make new friends, and celebrate your favorite K-pop artists together.",
     "explore_events": "Explore Events",
-    "join_community": "Join Community"
+    "join_community": "Join Community",
+    "discover_community": "Discover K-pop Fan Communities",
+    "join_favorite_groups": "Join fellow fans and connect with communities dedicated to your favorite K-pop groups.",
+    "feature_events": "Featured Events",
+    "discover_event": "Discover popular K-pop fan meetups and events",
+    "view_all": "View all events"
+  },
+  "navbar": {
+    "home": "Home",
+    "events": "Events",
+    "pricing": "Pricing",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
+  },
+  "footer": {
+    "description": "Connect with K-pop fans around the world and join exciting meetups.",
+    "navigation": {
+      "navigation": "Navigation",
+      "home": "Home",
+      "events": "Events",
+      "pricing": "Pricing"
+    },
+    "account": {
+      "account": "Account",
+      "login": "Login",
+      "register": "Register"
+    },
+    "legal": {
+      "legal": "Legal",
+      "privacy_policy": "Privacy Policy",
+      "terms_of_service": "Terms of Service",
+      "cookie_policy": "Cookie Policy"
+    },
+    "all_rights_reserved": "All rights reserved."
   }
 }

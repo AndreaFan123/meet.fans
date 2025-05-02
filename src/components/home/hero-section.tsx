@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Music, Search } from "lucide-react";
 import { KPOP_GROUPS } from "@/lib/constants";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const backgrounds = KPOP_GROUPS.slice(0, 5).map((group) => group.image);
+  const t = useTranslations("homePage");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,28 +47,30 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in-up">
           <div className="flex items-center justify-center mb-4">
-            <Music className="h-10 w-10 text-primary mr-2" />
+            <Music className="h-14 w-14 mr-2 text-white" />
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
-              MelodyMeet
+              meetFans
             </h1>
           </div>
           <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-6">
-            Connect with <span className="text-primary font-bold">K-pop</span> fans <br className="hidden sm:block" />
-            and join exciting meetups
+            {t("connect_with")}{" "}
+            <span className="text-purple-300 font-bold">{t("k-pop")}</span>{" "}
+            {t("fans")} <br className="hidden sm:block" />
+            {t("join_meetups")}
           </p>
-          <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-            Discover events hosted by passionate fans, make new friends, and celebrate your favorite K-pop artists together.
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            {t("description")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link href="/events">
               <Button size="lg" className="w-full sm:w-auto">
                 <Search className="h-4 w-4 mr-2" />
-                Explore Events
+                {t("explore_events")}
               </Button>
             </Link>
             <Link href="/register">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                Join Community
+                {t("join_community")}
               </Button>
             </Link>
           </div>

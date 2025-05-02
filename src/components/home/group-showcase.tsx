@@ -1,20 +1,22 @@
 import { KPOP_GROUPS } from "@/lib/constants";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export function GroupShowcase() {
+  const t = useTranslations("homePage");
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Discover K-pop Fan Communities</h2>
+        <h2 className="text-3xl font-bold mb-4">{t("discover_community")}</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Join fellow fans and connect with communities dedicated to your favorite K-pop groups.
+          {t("join_favorite_groups")}
         </p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {KPOP_GROUPS.map((group, index) => (
+        {KPOP_GROUPS.map((group) => (
           <Link
             href={`/events?group=${group.id}`}
             key={group.id}
