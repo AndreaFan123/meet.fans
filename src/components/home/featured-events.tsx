@@ -1,4 +1,4 @@
-import { SAMPLE_EVENTS } from "@/lib/constants";
+import { SAMPLE_EVENTS_ZH } from "@/lib/constants";
 import { EventList } from "@/components/events/event-list";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export function FeaturedEvents() {
   const t = useTranslations("homePage");
   // In a real app, you'd fetch this data from an API
-  const featuredEvents = SAMPLE_EVENTS.slice(0, 3);
+  const featuredEvents = SAMPLE_EVENTS_ZH.slice(0, 3);
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

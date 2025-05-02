@@ -4,11 +4,19 @@ import { useState } from "react";
 import { KPOP_GROUPS } from "@/lib/constants";
 import { KpopGroup } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
-import { Fade, StaggeredContainer } from "@/components/ui/motion";
+import { Fade } from "@/components/ui/motion";
+import { useRouter } from "@/i18n/navigation";
 
 interface TopicSelectionProps {
   onComplete: (selectedTopics: string[]) => void;
@@ -17,10 +25,11 @@ interface TopicSelectionProps {
 export function TopicSelection({ onComplete }: TopicSelectionProps) {
   const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const toggleGroup = (groupId: string) => {
     if (selectedGroups.includes(groupId)) {
-      setSelectedGroups(selectedGroups.filter(id => id !== groupId));
+      setSelectedGroups(selectedGroups.filter((id) => id !== groupId));
     } else {
       setSelectedGroups([...selectedGroups, groupId]);
     }
@@ -32,6 +41,8 @@ export function TopicSelection({ onComplete }: TopicSelectionProps) {
       onComplete(selectedGroups);
       setIsSubmitting(false);
     }, 1000);
+
+    router.push("/");
   };
 
   return (
@@ -49,8 +60,8 @@ export function TopicSelection({ onComplete }: TopicSelectionProps) {
               <div
                 className={cn(
                   "relative group cursor-pointer rounded-lg overflow-hidden aspect-square border-2",
-                  selectedGroups.includes(group.id) 
-                    ? "border-primary ring-2 ring-primary ring-offset-2 ring-offset-background" 
+                  selectedGroups.includes(group.id)
+                    ? "border-primary ring-2 ring-primary ring-offset-2 ring-offset-background"
                     : "border-transparent hover:border-primary/50"
                 )}
                 onClick={() => toggleGroup(group.id)}
@@ -65,7 +76,7 @@ export function TopicSelection({ onComplete }: TopicSelectionProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                 </div>
-                
+
                 <div className="absolute inset-0 z-20 flex flex-col justify-between p-2">
                   <div className="self-end">
                     {selectedGroups.includes(group.id) && (
@@ -75,7 +86,9 @@ export function TopicSelection({ onComplete }: TopicSelectionProps) {
                     )}
                   </div>
                   <div>
-                    <h3 className="text-white text-sm font-medium">{group.name}</h3>
+                    <h3 className="text-white text-sm font-medium">
+                      {group.name}
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -84,8 +97,8 @@ export function TopicSelection({ onComplete }: TopicSelectionProps) {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col space-y-4">
-        <Button 
-          onClick={handleSubmit} 
+        <Button
+          onClick={handleSubmit}
           className="w-full"
           disabled={selectedGroups.length === 0 || isSubmitting}
         >

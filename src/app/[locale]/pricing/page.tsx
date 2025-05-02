@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { MEMBERSHIP_PLANS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
@@ -14,14 +15,13 @@ import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mt-32 mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <Fade duration={500}>
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
-            Choose Your Membership Plan
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">選擇適合你的訂閱服務</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Join our community with a plan that fits your needs
+            meetFans
+            提供多種訂閱計劃，以滿足不同需求的粉絲。無論你是新手還是資深粉絲，我們都有適合你的計劃。
           </p>
         </div>
 
@@ -46,7 +46,9 @@ export default function PricingPage() {
                 <CardDescription>
                   {plan.price === 0
                     ? "Free forever"
-                    : `$${plan.price.toFixed(2)} per month`}
+                    : plan.id === "yearly" || plan.id === "annual"
+                    ? `$${plan.price.toFixed(2)} / 年`
+                    : `$${plan.price.toFixed(2)} / 月`}
                 </CardDescription>
               </CardHeader>
 
@@ -76,56 +78,49 @@ export default function PricingPage() {
         </div>
 
         <div className="mt-16 max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">常見問題</h2>
 
           <div className="mt-8 space-y-6 text-left">
             <div>
               <h3 className="font-semibold mb-2">
-                Can I change my plan later?
+                我可以隨時升級或降級我的計劃嗎？
               </h3>
               <p className="text-muted-foreground">
-                Yes, you can upgrade or downgrade your plan at any time. Changes
-                will be applied at the start of your next billing cycle.
+                當然！你可以隨時升級或降級你的計劃。只需前往帳戶設定，選擇你想要的計劃並完成付款即可。
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-2">我如何取消我的訂閱？</h3>
+              <p className="text-muted-foreground">
+                meetFans
+                的取消訂閱非常簡單，你只要前往帳戶設定頁面，然後點擊取消訂閱按鈕即可。
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-2">有退款機制嗎？</h3>
+              <p className="text-muted-foreground">
+                我們不提供退款，但你可以在下個計劃週期之前隨時取消訂閱。
+                您的訂閱將會在當前訂閱週期結束時終止。
               </p>
             </div>
 
             <div>
               <h3 className="font-semibold mb-2">
-                How do I cancel my subscription?
+                如果我取消訂閱，我的資料會不會被刪除？
               </h3>
               <p className="text-muted-foreground">
-                You can cancel your subscription anytime from your account
-                settings. You'll continue to have access until the end of your
-                current billing period.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">Are there any refunds?</h3>
-              <p className="text-muted-foreground">
-                We don't offer refunds for monthly subscriptions, but you can
-                cancel anytime to avoid future charges.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">
-                What happens to my profile if I downgrade?
-              </h3>
-              <p className="text-muted-foreground">
-                Your profile will remain intact, but you'll lose access to
-                premium features associated with your previous plan.
+                取消訂閱後，直到當前訂閱週期結束，你仍會享有所有的會員權益。之後的會員權益，請參考免費會員的項目。
               </p>
             </div>
           </div>
 
           <div className="mt-10">
             <p className="text-muted-foreground mb-4">
-              Still have questions? We're here to help.
+              如果你有其他問題或需要進一步的幫助，請隨時聯繫我們的客服支援團隊。
             </p>
-            <Button variant="outline">Contact Support</Button>
+            <Button variant="outline">聯絡我們</Button>
           </div>
         </div>
       </Fade>

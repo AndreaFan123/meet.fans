@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { SAMPLE_EVENTS } from "@/lib/constants";
+import { SAMPLE_EVENTS_ZH } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -26,19 +26,19 @@ export default function EventPage() {
   const [isSaved, setIsSaved] = useState(false);
 
   // Find the event by ID
-  const event = SAMPLE_EVENTS.find((e) => e.id === id);
+  const event = SAMPLE_EVENTS_ZH.find((e) => e.id === id);
 
   if (!event) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
         <h1 className="text-2xl font-bold mb-4">Event not found</h1>
         <p className="text-muted-foreground mb-8">
-          The event you're looking for doesn't exist or has been removed.
+          這個活動似乎已經不存在或已經被刪除 :(
         </p>
         <Link href="/events">
           <Button>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Events
+            返回活動列表
           </Button>
         </Link>
       </div>
@@ -47,25 +47,27 @@ export default function EventPage() {
 
   const formattedDate = format(event.date, "EEEE, MMMM d, yyyy");
   const formattedTime = format(event.date, "h:mm a");
-  const remainingSpots = event.capacity - event.attendeeCount;
+  const remainingSpots = event.capacity
+    ? event.capacity - (event.attendeeCount || 0)
+    : 0;
   const isSoldOut = remainingSpots <= 0;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mt-32 mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <Fade duration={500}>
         <Link
           href="/events"
           className="inline-flex items-center text-muted-foreground hover:text-primary mb-6"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Events
+          返回活動列表
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="relative aspect-video rounded-lg overflow-hidden mb-6">
               <Image
-                src={event.image}
+                src={event.image ?? ""}
                 alt={event.title}
                 fill
                 className="object-cover"
@@ -75,7 +77,7 @@ export default function EventPage() {
 
             <div className="mb-8">
               <div className="flex flex-wrap gap-2 mb-4">
-                {event.groups.map((group) => (
+                {event.groups?.map((group) => (
                   <Badge key={group} variant="secondary">
                     {group.toUpperCase()}
                   </Badge>
@@ -85,7 +87,7 @@ export default function EventPage() {
               <div className="flex items-center text-muted-foreground mb-6">
                 <div className="mr-4 flex items-center">
                   <Users className="mr-2 h-4 w-4" />
-                  <span>{event.attendeeCount} attending</span>
+                  <span>{event.attendeeCount} 參加</span>
                 </div>
                 <div className="mr-4 flex items-center">
                   <MapPin className="mr-2 h-4 w-4" />
@@ -96,47 +98,20 @@ export default function EventPage() {
               <div className="prose dark:prose-invert max-w-none">
                 <p className="text-lg">{event.description}</p>
 
-                <h2 className="text-xl font-semibold mt-8 mb-4">
-                  Event Details
-                </h2>
+                <h2 className="text-xl font-semibold mt-8 mb-4">活動詳情</h2>
                 <p>
-                  Join us for an unforgettable K-pop experience! This event is
-                  perfect for fans of all ages who want to connect with fellow
-                  enthusiasts and celebrate their favorite artists.
-                </p>
-                <p>
-                  Whether you're a longtime fan or new to K-pop, you'll find a
-                  welcoming community ready to share their passion for music,
-                  dance, and Korean pop culture.
+                  這是一個線上聚會，我們將播放 BTS
+                  所有專輯，你可以開螢幕一起聊天，或者你只是想安靜地聽歌也可以！這是一個
                 </p>
 
-                <h2 className="text-xl font-semibold mt-8 mb-4">
-                  What to Expect
-                </h2>
+                <h2 className="text-xl font-semibold mt-8 mb-4">注意事項</h2>
                 <ul>
-                  <li>Meet fellow fans and make new friends</li>
-                  <li>Share your favorite music and memories</li>
-                  <li>Participate in fun activities and games</li>
-                  <li>Learn more about K-pop culture and history</li>
-                  <li>Potential merchandise exchanges and trades</li>
-                </ul>
-
-                <h2 className="text-xl font-semibold mt-8 mb-4">
-                  Important Notes
-                </h2>
-                <ul>
-                  <li>Please arrive 15 minutes before the event starts</li>
-                  <li>Bring your own refreshments if desired</li>
-                  <li>
-                    All ages welcome, but minors should be accompanied by an
-                    adult
-                  </li>
-                  <li>Photography and social media sharing is encouraged!</li>
+                  <li>活動前 15 分鐘我們將會寄送會議室連結。</li>
+                  <li>請確保你有安裝 Zoom 或 Google Meet 的應用程式。</li>
                 </ul>
               </div>
-
               <div className="flex flex-wrap gap-2 mt-8">
-                {event.tags.map((tag) => (
+                {event.tags?.map((tag) => (
                   <Badge key={tag} variant="outline">
                     #{tag}
                   </Badge>
@@ -150,9 +125,9 @@ export default function EventPage() {
               <div className="bg-card rounded-lg border border-border p-6 mb-6">
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold">
+                    <h3 className="text-lg font-bold">
                       {event.price === 0
-                        ? "Free"
+                        ? "Free |  請自行準備飲料或零食"
                         : `${event.price} ${event.currency}`}
                     </h3>
                   </div>
@@ -190,7 +165,7 @@ export default function EventPage() {
                     <div>
                       <p className="font-medium">{event.location}</p>
                       <p className="text-sm text-muted-foreground">
-                        Full address provided after registration
+                        會議連結將會於活動前寄送
                       </p>
                     </div>
                   </div>
@@ -200,13 +175,13 @@ export default function EventPage() {
 
                 <div className="mb-6">
                   <p className="flex justify-between mb-2">
-                    <span>Capacity</span>
-                    <span>{event.capacity} people</span>
+                    <span>可參加人數</span>
+                    <span>{event.capacity} 名粉絲</span>
                   </p>
                   <p className="flex justify-between text-muted-foreground mb-4">
-                    <span>Remaining spots</span>
+                    <span>剩餘位置</span>
                     <span>
-                      {isSoldOut ? "Sold out" : `${remainingSpots} spots left`}
+                      {isSoldOut ? ":( 已滿額" : `${remainingSpots} 名粉絲`}
                     </span>
                   </p>
                   <div className="w-full bg-muted rounded-full h-2">
@@ -214,7 +189,9 @@ export default function EventPage() {
                       className="bg-primary h-2 rounded-full"
                       style={{
                         width: `${
-                          (event.attendeeCount / event.capacity) * 100
+                          ((event?.attendeeCount ?? 0) /
+                            (event?.capacity ?? 1)) *
+                          100
                         }%`,
                       }}
                     />
@@ -222,7 +199,7 @@ export default function EventPage() {
                 </div>
 
                 <Button className="w-full mb-3" disabled={isSoldOut}>
-                  {isSoldOut ? "Sold Out" : "Register Now"}
+                  {isSoldOut ? ":( 太遲了！" : "還有位置，快來！"}
                 </Button>
 
                 {isSoldOut && (
@@ -233,18 +210,16 @@ export default function EventPage() {
               </div>
 
               <div className="bg-card rounded-lg border border-border p-6">
-                <h3 className="font-semibold mb-4">Organized by</h3>
+                <h3 className="font-semibold mb-4">團主</h3>
                 <div className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mr-3">
                     <span className="font-semibold">
-                      {event.organizer.name.charAt(0)}
+                      {event.organizer?.name.charAt(0)}
                     </span>
                   </div>
+                  {/* TODO: Possibly change to link so that users can view its profile */}
                   <div>
-                    <p className="font-medium">{event.organizer.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      Event Organizer
-                    </p>
+                    <p className="font-medium">{event.organizer?.name}</p>
                   </div>
                 </div>
               </div>

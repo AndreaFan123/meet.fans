@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CalendarIcon, MapPin, Users } from "lucide-react";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/lib/types";
@@ -14,7 +19,11 @@ interface EventCardProps {
   featured?: boolean;
 }
 
-export function EventCard({ event, className, featured = false }: EventCardProps) {
+export function EventCard({
+  event,
+  className,
+  featured = false,
+}: EventCardProps) {
   const {
     id,
     title,
@@ -22,17 +31,15 @@ export function EventCard({ event, className, featured = false }: EventCardProps
     image,
     date,
     location,
-    price,
-    currency,
     capacity,
     attendeeCount,
     tags,
   } = event;
-
   const formattedDate = format(date, "MMMM d, yyyy 'at' h:mm a");
-  const remainingSpots = capacity - attendeeCount;
+  const remainingSpots =
+    capacity && attendeeCount ? capacity - attendeeCount : 0;
   const isSoldOut = remainingSpots <= 0;
-  const isLowAvailability = remainingSpots <= capacity * 0.1;
+  const isLowAvailability = capacity ? remainingSpots <= capacity * 0.1 : false;
 
   return (
     <Card
@@ -44,7 +51,7 @@ export function EventCard({ event, className, featured = false }: EventCardProps
     >
       <div className="relative h-48 sm:h-64 w-full">
         <Image
-          src={image}
+          src={image || ""}
           alt={title}
           fill
           className="object-cover"
@@ -102,7 +109,7 @@ export function EventCard({ event, className, featured = false }: EventCardProps
         </div>
         <p className="text-sm line-clamp-2 mb-3">{description}</p>
         <div className="flex flex-wrap gap-1 mt-2">
-          {tags.slice(0, 3).map((tag) => (
+          {tags?.slice(0, 3).map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>
@@ -111,12 +118,13 @@ export function EventCard({ event, className, featured = false }: EventCardProps
       </CardContent>
 
       <CardFooter className="p-4 pt-0 flex items-center justify-between">
-        <span className="font-bold">
-          {price === 0 ? "Free" : `${price} ${currency}`}
-        </span>
         <Link href={`/events/${id}`}>
-          <Button size="sm" variant={isSoldOut ? "secondary" : "default"} disabled={isSoldOut}>
-            {isSoldOut ? "Sold Out" : "View Details"}
+          <Button
+            size="sm"
+            variant={isSoldOut ? "secondary" : "default"}
+            disabled={isSoldOut}
+          >
+            {isSoldOut ? "滿團" : "快加入！"}
           </Button>
         </Link>
       </CardFooter>

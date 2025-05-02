@@ -1,4 +1,4 @@
-import { SAMPLE_EVENTS } from "@/lib/constants";
+import { SAMPLE_EVENTS_ZH } from "@/lib/constants";
 import { EventList } from "@/components/events/event-list";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 
 export default function EventsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto mt-32 px-4 sm:px-6 lg:px-8 py-12">
       <Fade duration={500}>
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Discover K-pop Events</h1>
@@ -29,7 +29,7 @@ export default function EventsPage() {
 
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-6">All Events</h2>
-          <EventList events={SAMPLE_EVENTS} columns={3} />
+          <EventList events={SAMPLE_EVENTS_ZH} columns={3} />
         </div>
       </Fade>
     </div>

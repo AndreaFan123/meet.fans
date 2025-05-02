@@ -1,6 +1,11 @@
 export type UserRole = "user" | "admin";
 
+export type Membership = "free" | "monthly" | "annual";
+
 export type Locale = "zh-TW" | "en-US";
+
+export type EventStatus = "Upcoming" | "Completed" | "Canceled";
+
 export interface User {
   id: string;
   name: string;
@@ -15,6 +20,7 @@ export interface User {
   };
   favoriteGroups?: string[];
   role: UserRole;
+  membership: Membership;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -22,19 +28,20 @@ export interface User {
 export interface Event {
   id: string;
   title: string;
-  description: string;
-  image: string;
+  description?: string;
+  image?: string;
   date: Date;
-  location: string;
-  organizer: User;
-  price: number;
-  currency: string;
-  capacity: number;
-  attendeeCount: number;
-  groups: string[];
-  tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  location?: string;
+  organizer?: User;
+  price?: number;
+  currency?: string;
+  capacity?: number;
+  attendeeCount?: number;
+  groups?: string[];
+  status: EventStatus;
+  tags?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface KpopGroup {
