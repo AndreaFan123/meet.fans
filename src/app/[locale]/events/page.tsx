@@ -1,4 +1,4 @@
-import { SAMPLE_EVENTS_ZH } from "@/lib/constants";
+import { SAMPLE_EVENTS_ZH } from "@/mock/data";
 import { EventList } from "@/components/events/event-list";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

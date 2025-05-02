@@ -11,7 +11,38 @@
     "join_favorite_groups": "Join fellow fans and connect with communities dedicated to your favorite K-pop groups.",
     "feature_events": "Featured Events",
     "discover_event": "Discover popular K-pop fan meetups and events",
-    "view_all": "View all events"
+    "view_all": "View all events",
+    "testimonialTitle": "What Our Community Says",
+    "testimonialDescription": "Join thousands of K-pop fans who have found their community through meetFans.",
+    "readyToJoin": "Ready to join the community?",
+    "createProfile": "Create your profile, connect with other fans, and start discovering K-pop events near you.",
+    "joinNow": "Join Now",
+    "browseEvents": "Browse Events"
+  },
+  "registerPage": {
+    "title": "Create an account",
+    "description": "Join our community of K-pop fans",
+    "fullName": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "createPassword": "Create a password",
+    "passwordHint": "Password must be at least 8 characters long",
+    "concent": "By creating an account, you agree to our Terms of Service and Privacy Policy.",
+    "createAccount": "Create account",
+    "creatingAccount": "Creating account...",
+    "haveAnAccount": "Already have an account?",
+    "signIn": "Sign in"
+  },
+  "loginPage": {
+    "title": "Welcome back!",
+    "description": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "login": "Sign in",
+    "loggingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "registerNow": "Sign up"
   },
   "navbar": {
     "home": "Home",

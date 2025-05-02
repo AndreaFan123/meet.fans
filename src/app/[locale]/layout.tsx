@@ -3,11 +3,12 @@ import { Work_Sans, Noto_Sans_TC } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import "./globals.css";
 import { Locale } from "@/lib/types";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+
+import "./globals.css";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",

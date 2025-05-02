@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Music2 } from "lucide-react";
+import { Music } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { TopicSelection } from "@/components/auth/topic-selection";
 import { Fade } from "@/components/ui/motion";
@@ -26,6 +27,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+  const t = useTranslations("registerPage");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,27 +53,25 @@ export default function RegisterPage() {
           <Card className="w-full max-w-md">
             <CardHeader className="space-y-2 text-center">
               <div className="flex justify-center mb-2">
-                <Music2 className="h-10 w-10 text-primary" />
+                <Music className="h-10 w-10 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Create an account</CardTitle>
-              <CardDescription>
-                Join our community of K-pop fans
-              </CardDescription>
+              <CardTitle className="text-2xl">{t("title")}</CardTitle>
+              <CardDescription>{t("description")}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t("fullName")}</Label>
                   <Input
                     id="name"
-                    placeholder="Your name"
+                    placeholder={t("fullName")}
                     value={user.name}
                     onChange={(e) => setUser({ ...user, name: e.target.value })}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t("email")}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -84,11 +84,11 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t("password")}</Label>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Create a password"
+                    placeholder={t("createPassword")}
                     value={user.password}
                     onChange={(e) =>
                       setUser({ ...user, password: e.target.value })
@@ -96,30 +96,27 @@ export default function RegisterPage() {
                     required
                   />
                   <p className="text-sm text-muted-foreground">
-                    Password must be at least 8 characters long
+                    {t("passwordHint")}
                   </p>
                 </div>
 
                 <Alert>
-                  <AlertDescription>
-                    By creating an account, you agree to our Terms of Service
-                    and Privacy Policy.
-                  </AlertDescription>
+                  <AlertDescription>{t("concent")}</AlertDescription>
                 </Alert>
 
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creating account..." : "Create account"}
+                  {isLoading ? t("creatingAccount") : t("createAccount")}
                 </Button>
               </form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
               <div className="text-center text-sm text-muted-foreground">
-                Already have an account?{" "}
+                {t("haveAnAccount")}{" "}
                 <Link
                   href="/auth/login"
                   className="text-primary hover:underline"
                 >
-                  Sign in
+                  {t("signIn")}
                 </Link>
               </div>
             </CardFooter>
