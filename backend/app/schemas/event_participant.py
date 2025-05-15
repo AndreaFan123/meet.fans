@@ -1,4 +1,3 @@
-# backend/app/schemas/event_participant.py
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel

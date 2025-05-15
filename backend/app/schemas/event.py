@@ -48,7 +48,9 @@ class EventCreate(EventBase):
 
 
 class EventUpdate(BaseModel):
-    """Schema for updating event information"""
+    """
+    Schema for updating event information
+    """
 
     title: Optional[str] = Field(None, min_length=3, max_length=255)
     description: Optional[str] = None
@@ -71,7 +73,9 @@ class EventUpdate(BaseModel):
 
 
 class EventInDBBase(EventBase):
-    """Schema for event data from the database"""
+    """
+    Schema for event data from the database
+    """
 
     id: int
     host_id: int
@@ -86,19 +90,25 @@ class EventInDBBase(EventBase):
 
 
 class Event(EventInDBBase):
-    """Schema for event data returned to clients"""
+    """
+    Schema for event data returned to clients
+    """
 
     pass
 
 
 class EventWithHost(Event):
-    """Event schema including host information"""
+    """
+    Event schema including host information
+    """
 
     host: "User"  # Forward reference to User schema
 
 
 class EventWithParticipantInfo(Event):
-    """Event schema with additional participation information for the current user"""
+    """
+    Event schema with additional participation information for the current user
+    """
 
     is_user_registered: bool = False
     user_participation_status: Optional[str] = None
