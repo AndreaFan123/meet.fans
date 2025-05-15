@@ -48,7 +48,7 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <Fade duration={500}>
         {step === "registration" ? (
-          <Card className="w-full max-w-md">
+          <Card className="w-full max-w-md mt-20">
             <CardHeader className="space-y-2 text-center">
               <div className="flex justify-center mb-2">
                 <Music2 className="h-10 w-10 text-primary" />

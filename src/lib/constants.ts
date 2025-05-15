@@ -8,6 +8,7 @@ export const NAV_LINKS = [
   { label: "home", href: "/" },
   { label: "events", href: "/events" },
   { label: "pricing", href: "/pricing" },
+  { label: "profile", href: "/profile" },
 ];
 
 export const KPOP_GROUPS: KpopGroup[] = [
