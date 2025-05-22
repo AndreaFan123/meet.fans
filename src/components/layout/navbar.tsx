@@ -1,4 +1,5 @@
 "use client";
+// TODO: link.label 翻譯
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
@@ -41,7 +42,7 @@ export function Navbar() {
                   href={link.href}
                   className="text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 >
-                  {t(link.label)}
+                  {link.label}
                 </Link>
               ))}
             </div>
@@ -103,7 +104,7 @@ export function Navbar() {
               className="text-muted-foreground hover:text-primary block px-3 py-2 text-base font-medium"
               onClick={() => setIsOpen(false)}
             >
-              {t(link.label)}
+              {link.label}
             </Link>
           ))}
           {isAuthenticated ? (

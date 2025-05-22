@@ -54,5 +54,40 @@
       "cookie_policy": "Cookie 政策"
     },
     "all_rights_reserved": "版權所有。"
+  },
+  "register": {
+    "create_account": "建立帳號",
+    "creating_account": "正在建立帳號...",
+    "join_community": "加入 K-pop 粉絲社區",
+    "email": "電子信箱",
+    "email_placeholder": "請輸入您的電子郵件",
+    "email_error": "請輸入有效的電子郵件地址",
+    "email_taken": "該電子郵件已被使用",
+    "password": "密碼",
+    "password_placeholder": "請輸入您的密碼",
+    "confirm_password": "確認密碼",
+    "confirm_password_placeholder": "請重新輸入您的密碼",
+    "password_matched": "密碼相符",
+    "username": "使用者名稱",
+    "username_placeholder": "請輸入您的使用者名稱",
+    "password_must_match": "密碼長度必須在8到20個字元之間，且需至少大小寫，數字和特殊字元各一個",
+    "account_consent": "建立帳號，表示您同意我們的隱私政策和服務條款。",
+    "already_have_account": "已經有帳號了？",
+    "signin": "登入"
+  },
+  "login": {
+    "welcome_back": "歡迎回來！",
+    "login_to_account": "登入您的帳號",
+    "not_have_account": "還沒有帳號？",
+    "login": "登入",
+    "logging_in": "正在登入...",
+    "forgot_password": "忘記密碼？",
+    "signup": "註冊",
+    "email": "電子信箱",
+    "email_placeholder": "請輸入您的電子郵件",
+    "email_error": "請輸入有效的電子郵件地址",
+    "email_taken": "該電子郵件已被使用",
+    "password": "密碼",
+    "password_placeholder": "請輸入您的密碼"
   }
 }
